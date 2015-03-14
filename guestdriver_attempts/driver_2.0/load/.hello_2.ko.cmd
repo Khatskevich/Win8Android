@@ -1,0 +1,1 @@
+cmd_/home/lesaha/driver/load/hello_2.ko := ld -r -m elf_i386 -T /usr/src/linux-headers-3.13.0-36-generic/scripts/module-common.lds --build-id  -o /home/lesaha/driver/load/hello_2.ko /home/lesaha/driver/load/hello_2.o /home/lesaha/driver/load/hello_2.mod.o

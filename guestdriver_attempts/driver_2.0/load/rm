@@ -1,0 +1,11 @@
+#!/bin/sh
+
+module=$1
+device=$2
+mode=$3
+
+
+# удалить давно ненужные узлы
+rmmod $1
+sh dev_clean $module $device $mode
+

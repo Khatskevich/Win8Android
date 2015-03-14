@@ -1,0 +1,28 @@
+/*  
+ *  hello-1.c - Простейший модуль ядра.
+ */
+#include <linux/module.h>       /* Необходим для любого модуля ядра */
+#include <linux/kernel.h>       /* Здесь находится определение KERN_ALERT */
+#include <linux/types.h>
+#include <linux/fs.h>         //file operations structure 
+                              //( pointers to open, read, write, close )
+#include <asm/uaccess.h>      //copy to/from user addrSpace
+#include <linux/cdev.h>       //char driver
+#include <linux/semaphore.h>    //
+
+#include "hello.h" // includeing the main hello header file
+
+
+
+static int d_e( void ){
+	return driver_entry();
+}
+
+static void d_ex( void ){
+driver_exit();
+}
+
+// Macroses which are giving information about INIT and EXIT driver functions
+module_init(d_e);
+module_exit(d_ex);
+

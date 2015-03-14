@@ -1,0 +1,18 @@
+#!/bin/sh
+ 
+ANDROIDSDK='android-14'
+ 
+PROGDIR='/home/lesaha/Desktop/android-ndk-r10d'
+PROGDIR=`cd $PROGDIR && pwd`
+ 
+ARMEABIGCC=$PROGDIR/toolchains/x86-4.8/prebuilt/linux-x86_64/bin/i686-linux-android-gcc
+ARMEABILIB=$PROGDIR/platforms/$ANDROIDSDK/arch-x86/usr/lib
+ARMEABIINC=$PROGDIR/platforms/$ANDROIDSDK/arch-x86/usr/include
+ARMEABICRT=$PROGDIR/platforms/$ANDROIDSDK/arch-x86/
+ 
+LINKER=/system/bin/linker
+ 
+echo "GCC:"$ARMEABIGCC "LIB:"$ARMEABILIB "LINKER":$LINKER "PARAMS:"
+ 
+$ARMEABIGCC mount.vboxsf.c -o mount.vboxsf -Wl,-rpath-link=$ARMEABILIB,-dynamic-linker=$LINKER --sysroot=$ARMEABICRT  #$ARMEABILIB -I$ARMEABIINC 
+##-nostdlib -lc

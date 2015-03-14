@@ -1,0 +1,121 @@
+execve("/usr/bin/make", ["make"], [/* 72 vars */]) = 0
+brk(0)                                  = 0xfe2000
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fa64b824000
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+open("/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=138828, ...}) = 0
+mmap(NULL, 138828, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fa64b802000
+close(3)                                = 0
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\320\37\2\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=1845024, ...}) = 0
+mmap(NULL, 3953344, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fa64b23e000
+mprotect(0x7fa64b3f9000, 2097152, PROT_NONE) = 0
+mmap(0x7fa64b5f9000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1bb000) = 0x7fa64b5f9000
+mmap(0x7fa64b5ff000, 17088, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7fa64b5ff000
+close(3)                                = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fa64b801000
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fa64b7ff000
+arch_prctl(ARCH_SET_FS, 0x7fa64b7ff740) = 0
+mprotect(0x7fa64b5f9000, 16384, PROT_READ) = 0
+mprotect(0x627000, 4096, PROT_READ)     = 0
+mprotect(0x7fa64b826000, 4096, PROT_READ) = 0
+munmap(0x7fa64b802000, 138828)          = 0
+getrlimit(RLIMIT_STACK, {rlim_cur=8192*1024, rlim_max=RLIM64_INFINITY}) = 0
+setrlimit(RLIMIT_STACK, {rlim_cur=RLIM64_INFINITY, rlim_max=RLIM64_INFINITY}) = 0
+brk(0)                                  = 0xfe2000
+brk(0x1003000)                          = 0x1003000
+open("/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=8470048, ...}) = 0
+mmap(NULL, 8470048, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fa64aa2a000
+close(3)                                = 0
+rt_sigaction(SIGHUP, {0x405aa0, [HUP], SA_RESTORER|SA_RESTART, 0x7fa64b274c30}, {SIG_DFL, [], 0}, 8) = 0
+rt_sigaction(SIGQUIT, {0x405aa0, [QUIT], SA_RESTORER|SA_RESTART, 0x7fa64b274c30}, {SIG_DFL, [], 0}, 8) = 0
+rt_sigaction(SIGINT, {0x405aa0, [INT], SA_RESTORER|SA_RESTART, 0x7fa64b274c30}, {SIG_DFL, [], 0}, 8) = 0
+rt_sigaction(SIGTERM, {0x405aa0, [TERM], SA_RESTORER|SA_RESTART, 0x7fa64b274c30}, {SIG_DFL, [], 0}, 8) = 0
+rt_sigaction(SIGXCPU, {0x405aa0, [XCPU], SA_RESTORER|SA_RESTART, 0x7fa64b274c30}, {SIG_DFL, [], 0}, 8) = 0
+rt_sigaction(SIGXFSZ, {0x405aa0, [XFSZ], SA_RESTORER|SA_RESTART, 0x7fa64b274c30}, {SIG_DFL, [], 0}, 8) = 0
+rt_sigaction(SIGCHLD, {SIG_DFL, [CHLD], SA_RESTORER|SA_RESTART, 0x7fa64b274c30}, {SIG_DFL, [], 0}, 8) = 0
+getcwd("/home/lesaha/temp/driver_3.0/load", 4096) = 34
+stat("/usr/include", {st_mode=S_IFDIR|0755, st_size=16384, ...}) = 0
+stat("/usr/gnu/include", 0x7fff70819310) = -1 ENOENT (No such file or directory)
+stat("/usr/local/include", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+stat("/usr/include", {st_mode=S_IFDIR|0755, st_size=16384, ...}) = 0
+rt_sigaction(SIGCHLD, {0x40de00, [CHLD], SA_RESTORER|SA_RESTART, 0x7fa64b274c30}, {SIG_DFL, [CHLD], SA_RESTORER|SA_RESTART, 0x7fa64b274c30}, 8) = 0
+rt_sigaction(SIGUSR1, {0x410540, [USR1], SA_RESTORER|SA_RESTART, 0x7fa64b274c30}, {SIG_DFL, [], 0}, 8) = 0
+stat(".", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+openat(AT_FDCWD, ".", O_RDONLY|O_NONBLOCK|O_DIRECTORY|O_CLOEXEC) = 3
+getdents(3, /* 20 entries */, 32768)    = 672
+getdents(3, /* 0 entries */, 32768)     = 0
+close(3)                                = 0
+open("Makefile", O_RDONLY)              = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=699, ...}) = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fa64b823000
+read(3, "# \320\225\321\201\320\273\320\270 KERNELRELEASE \320\276\320\277\321\200\320"..., 4096) = 699
+pipe([4, 5])                            = 0
+vfork()                                 = 21911
+close(5)                                = 0
+read(4, "/home/lesaha/temp/driver_3.0/loa"..., 200) = 34
+read(4, "", 166)                        = 0
+--- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=21911, si_status=0, si_utime=0, si_stime=0} ---
+rt_sigreturn()                          = 0
+close(4)                                = 0
+wait4(-1, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], 0, NULL) = 21911
+read(3, "", 4096)                       = 0
+close(3)                                = 0
+munmap(0x7fa64b823000, 4096)            = 0
+stat("RCS", 0x7fff708192c0)             = -1 ENOENT (No such file or directory)
+stat("SCCS", 0x7fff708192c0)            = -1 ENOENT (No such file or directory)
+stat("Makefile", {st_mode=S_IFREG|0644, st_size=699, ...}) = 0
+stat("default", 0x7fff708171b0)         = -1 ENOENT (No such file or directory)
+pipe([3, 4])                            = 0
+vfork()                                 = 21912
+close(4)                                = 0
+read(3, "3.13.0-32-generic\n", 200)     = 18
+--- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=21912, si_status=0, si_utime=0, si_stime=0} ---
+rt_sigreturn()                          = 18
+read(3, "", 182)                        = 0
+close(3)                                = 0
+wait4(-1, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], 0, NULL) = 21912
+fstat(1, {st_mode=S_IFCHR|0620, st_rdev=makedev(136, 15), ...}) = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fa64b823000
+write(1, "make -C /lib/modules/3.13.0-32-g"..., 89) = 89
+pipe([3, 4])                            = 0
+close(4)                                = 0
+fcntl(3, F_SETFD, FD_CLOEXEC)           = 0
+rt_sigprocmask(SIG_BLOCK, [HUP INT QUIT TERM XCPU XFSZ], NULL, 8) = 0
+vfork()                                 = 21913
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+wait4(-1, /home/lesaha/temp/driver_3.0/load/hello.c:15:21: fatal error: VMMDev2.h: No such file or directory
+ #include <VMMDev2.h>
+                     ^
+compilation terminated.
+make[2]: *** [/home/lesaha/temp/driver_3.0/load/hello.o] Error 1
+make[1]: *** [_module_/home/lesaha/temp/driver_3.0/load] Error 2
+[{WIFEXITED(s) && WEXITSTATUS(s) == 2}], 0, NULL) = 21913
+--- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=21913, si_status=2, si_utime=1, si_stime=0} ---
+rt_sigreturn()                          = 21913
+open("/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 4
+fstat(4, {st_mode=S_IFREG|0644, st_size=2570, ...}) = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fa64b822000
+read(4, "# Locale name alias data base.\n#"..., 4096) = 2570
+read(4, "", 4096)                       = 0
+close(4)                                = 0
+munmap(0x7fa64b822000, 4096)            = 0
+open("/usr/share/locale/en_US/LC_MESSAGES/make.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/share/locale/en/LC_MESSAGES/make.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/share/locale-langpack/en_US/LC_MESSAGES/make.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/share/locale-langpack/en/LC_MESSAGES/make.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+write(2, "make: ", 6make: )                   = 6
+write(2, "*** [default] Error 2", 21*** [default] Error 2)   = 21
+write(2, "\n", 1
+)                       = 1
+rt_sigprocmask(SIG_BLOCK, [HUP INT QUIT TERM XCPU XFSZ], NULL, 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+chdir("/home/lesaha/temp/driver_3.0/load") = 0
+close(1)                                = 0
+munmap(0x7fa64b823000, 4096)            = 0
+exit_group(2)                           = ?
++++ exited with 2 +++

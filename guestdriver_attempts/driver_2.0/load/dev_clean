@@ -1,0 +1,10 @@
+#!/bin/sh
+
+module=$1
+device=$2
+mode=$3
+
+
+# удалить давно ненужные узлы
+rm -f /dev/${device}
+ 

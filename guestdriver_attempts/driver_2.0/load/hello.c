@@ -1,0 +1,177 @@
+/*
+ *  hello-1.c - Простейший модуль ядра.
+ */
+#include <linux/module.h>       /* Необходим для любого модуля ядра */
+#include <linux/kernel.h>       /* Здесь находится определение KERN_ALERT */
+#include <linux/types.h>
+#include <linux/fs.h> 	        //file operations structure 
+				//( pointers to open, read, write, close )
+#include <asm/uaccess.h>     	//copy to/from user addrSpace
+#include <linux/cdev.h>      	//char driver
+#include <linux/semaphore.h>    //
+
+#include <linux/slab.h>     //kmalloc()
+
+#include "hello.h" // includeing the main hello header file
+
+MODULE_LICENSE("Dual BSD/GPL");
+
+static struct fake_device v_dev;
+static struct fake_device* virtual_device= &v_dev;
+
+static int major_number;
+static dev_t dev_num;
+
+
+struct file_operations fops =
+{
+    .owner = THIS_MODULE,
+    .open = device_open,
+    .release = device_close,
+    .write = device_write,
+    .read = device_read
+};
+
+//static int driver_entry(void)
+int driver_entry(void)
+{
+    int ret = 0;
+    unsigned int count = 1, firstminor = 0;
+    ret = alloc_chrdev_region( &dev_num, firstminor, count, DEV_NAME);
+    if (ret < 0)
+    {
+        printk(KERN_ALERT "Hello world 1.\nres = %d\n", ret);
+        return ret;
+    }
+    major_number = MAJOR(dev_num);
+    printk(KERN_INFO "Hello world 1.\nmajor = %u\nminor = %u\n",
+           MAJOR(dev_num),
+           MINOR(dev_num) );
+
+    // cdev initialization
+    printk(KERN_ALERT "Hello world 1. cdev_init\n");
+    cdev_init(&virtual_device->mcdev, &fops);
+    virtual_device->mcdev.ops = &fops;
+    printk(KERN_ALERT "Hello world 1. owner\n");
+    virtual_device->mcdev.owner = THIS_MODULE; // is it MACROS?
+   
+    printk(KERN_ALERT "Hello world 1. kalloc\n");
+    virtual_device->data = (char*) kmalloc( DEVICE_BUFFER_SIZE , GFP_KERNEL); 
+    virtual_device->len = 0;
+    sema_init( &virtual_device->sem, 1); //semapthre initialization
+    
+    printk(KERN_ALERT "Hello world 1. cdev_add\n");
+    ret = cdev_add(&virtual_device->mcdev, dev_num, 1);
+    if ( ret < 0)
+    {
+        printk(KERN_ALERT "hello: umable to add cdev to kernel");
+        return ret;
+    }
+    return 0;
+}
+
+//static void driver_exit(void)
+void driver_exit(void)
+{
+    kfree(virtual_device->data);
+    cdev_del(&virtual_device->mcdev);
+    unregister_chrdev_region( dev_num , 1);
+    printk(KERN_ALERT "Goodbye world 1.\n");
+}
+
+// Macroses which are giving information about INIT and EXIT driver functions
+module_init(driver_entry);
+module_exit(driver_exit);
+
+static int device_open( struct inode * inode, struct file* flip)
+{
+    struct fake_device * virtual_device;
+    
+    printk(KERN_ALERT "hello: open");
+    flip->private_data = container_of(inode->i_cdev, struct fake_device , mcdev); 
+    virtual_device = flip->private_data;
+    
+    if( down_interruptible(&virtual_device->sem) != 0)
+    {
+        printk(KERN_ALERT "hello: could not lock device during open");
+        return -1;
+    }
+    printk(KERN_INFO "hello: opened device");
+    return 0;
+}
+
+static ssize_t device_read( struct file* flip,
+                            char* bufStoreData,
+                            size_t bufCount,
+                            loff_t* curOffset)
+{
+    struct fake_device * virtual_device;
+    ssize_t ret = 0;
+
+    printk(KERN_ALERT "hello: read\n");
+    virtual_device = flip->private_data;
+    if ( bufCount < 0) return -1;
+    if ( *curOffset + bufCount > virtual_device->len )  // if read asks more
+        bufCount = virtual_device->len - * curOffset;   // bytes then it is possible
+    
+    printk(KERN_INFO "hello: reading from device\n");
+    if (copy_to_user(bufStoreData, virtual_device->data, bufCount) ){
+        ret = -EFAULT;
+        goto out;
+    }
+
+    *curOffset = *curOffset + bufCount;
+    ret = bufCount;
+
+out:
+    return ret;
+}
+
+
+static ssize_t device_write( struct file* flip,
+                             const char* bufSourceData,
+                             size_t bufCount,
+                             loff_t* curOffset)
+{
+    struct fake_device * virtual_device;
+    int ret = 0;
+
+    printk(KERN_ALERT "hello: write\n");
+    virtual_device = flip->private_data;
+    if ( bufCount < 0) return -1;
+    if ( *curOffset + bufCount > DEVICE_BUFFER_SIZE )   // if read asks more
+        bufCount = DEVICE_BUFFER_SIZE - * curOffset;   // bytes then it is possible
+    
+    printk(KERN_INFO "hello: writing to the device\n");
+    if (copy_from_user(virtual_device->data, bufSourceData , bufCount)){
+        ret = -EFAULT;
+        goto out;
+    }
+    
+    //printk(KERN_INFO "hello: writing ret = %d \n", ret);
+    //if ( ret == 0)
+    //    return -1;
+
+    *curOffset = *curOffset + bufCount;   
+    virtual_device->len = *curOffset;
+    ret = bufCount;
+out:
+    return ret;
+}
+
+static int device_close( struct inode *inode, struct file *filp)
+{
+    struct fake_device * virtual_device;
+
+    printk(KERN_ALERT "hello: close");
+    virtual_device = filp->private_data;
+    up(&virtual_device->sem);
+    printk(KERN_INFO "hello: closed device");
+    return 0;
+}
+
+
+
+
+
+

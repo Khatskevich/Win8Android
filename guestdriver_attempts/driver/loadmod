@@ -1,0 +1,25 @@
+#!/bin/sh
+module="hello"
+device="hello"
+mode="666"
+driver_directory="./load"
+pwd_=$(pwd)
+if [ $# = 0 ] ; then
+	echo please, tupe one of these comands:
+	echo load  - loading the module
+	echo rm    - removing of the module
+	exit 0
+fi
+
+cd $driver_directory
+
+if [ "$1" = "load" ] ; then
+	./dev_clean "$module" "$device" "$mode"
+	./load "$module" "$device" "$mode"
+fi
+if [ "$1" = "rm" ] ; then
+	./rm "$module" "$device" "$mode"
+fi
+
+#cd $pwd_
+

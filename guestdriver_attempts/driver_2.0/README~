@@ -1,0 +1,10 @@
+to install module just type 
+sudo ./loadmod load
+to uninstall 
+sudo ./loadmod rm
+
+to check for working you can type commands like this:
+echo "Kost9 molodec" >> /dev/hello
+cat /dev/hello
+
+and you should see what you was type
