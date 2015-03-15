@@ -17,8 +17,10 @@ public class Valera extends IntentService {
     public Valera() {
         super("Name for Service");
     }
+
     @Override
     protected void onHandleIntent(Intent workIntent) {
+
         // Gets data from the incoming Intent
         String dataString = workIntent.getDataString();
     int i = 0;

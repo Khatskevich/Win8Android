@@ -1,5 +1,6 @@
 package com.example.lesaha.test6;
 
+import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -20,7 +21,8 @@ public class BootReceiver extends BroadcastReceiver {
         //context.startActivity(i);
         Toast.makeText(context, "Go go go!!! =)",
                 Toast.LENGTH_LONG).show();
-        context.startService( new Intent(context, Valera.class));
-        //startService(new Intent(this, Valera.class));
+        if ( !ServiceTools.isServiceRunning(context, "Valera") ) {
+            context.startService(new Intent(context, Valera.class));
+        }
     }
 }

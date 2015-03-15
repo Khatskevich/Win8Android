@@ -1,5 +1,7 @@
 package com.example.lesaha.test6;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,10 +12,19 @@ import android.widget.Button;
 
 public class MainActivity extends ActionBarActivity {
     Button butStart;
+    private static Context context;
+    private static Intent serviceValera;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        MainActivity.context = this;
+
+        if ( !ServiceTools.isServiceRunning(context, "Valera") ) {
+            MainActivity.serviceValera= new Intent(context, Valera.class);
+            context.startService(MainActivity.serviceValera  );
+        }
+
         butStart = (Button) findViewById(R.id.buttonStart);
         butStart.setOnClickListener( new View.OnClickListener() {
             @Override
