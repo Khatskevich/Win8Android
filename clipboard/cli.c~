@@ -384,7 +384,7 @@ int main()
  */
 //int VbglR3ClipboardWriteData(uint32_t u32ClientId, uint32_t fFormat, void *pv, uint32_t cb)
     char valera[] = {'B', '\0',' ', '\0','s', '\0','o', '\0','s', '\0','e', '\0','t', '\0','0', '\0', };
-   rc = VbglR3ClipboardWriteData( client, 3 , valera , 16);
+   rc = VbglR3ClipboardWriteData( client, 1 , valera , 16);
 
 
 
@@ -412,7 +412,7 @@ int main()
  */
     //int VbglR3ClipboardReportFormats(uint32_t u32ClientId, uint32_t fFormats)
 
- //   rc = VbglR3ClipboardReportFormats(client, 3);
+   rc = VbglR3ClipboardReportFormats(client, 1);
 
 
 

@@ -357,7 +357,7 @@ int main()
             printf("Count = %u\n" , count);
             int i;
             for ( i = 0; i < count; i++)
-               { printf("%d %u ", i, (uint32_t) valera[i]);
+               { printf("%d %x ", i, (uint32_t) valera[i]);
                 printf("%c\n", valera[i]);}
             printf("\n");
 
